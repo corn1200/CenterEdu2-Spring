@@ -26,7 +26,7 @@ public class UserRoute {
 
     @GetMapping("/{user_id}")
     @ResponseBody
-    public User getUser(@PathVariable(value="user_id") String userId) throws Exception {
+    public User getUser(@PathVariable(value = "user_id") String userId) throws Exception {
         return this.userService.find(Integer.parseInt(userId));
     }
 
@@ -38,5 +38,10 @@ public class UserRoute {
     @GetMapping("/initialize")
     public void initializeUsers() {
         this.userService.initializeUsers();
+    }
+
+    @DeleteMapping("/{user_id}")
+    public void deleteUser(@PathVariable(value = "user_id") String userId) {
+        this.userService.deleteUser(Integer.parseInt(userId));
     }
 }
