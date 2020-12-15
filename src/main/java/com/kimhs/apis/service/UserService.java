@@ -2,6 +2,7 @@ package com.kimhs.apis.service;
 
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.repository.UserRepository;
+import com.kimhs.apis.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -49,5 +50,20 @@ public class UserService {
         this.userRepository.save(user2);
         this.userRepository.save(user3);
         this.userRepository.flush();
+    }
+
+    public void createUser(UserRegisterVO userRegisterVO) {
+        User createUser = User.builder()
+                .email(userRegisterVO.getEmail())
+                .phone(userRegisterVO.getPhone())
+                .name(userRegisterVO.getName())
+                .build();
+
+        this.userRepository.save(createUser);
+        this.userRepository.flush();
+    }
+
+    public void deleteUser(int userId) {
+        this.userRepository.deleteById(userId);
     }
 }
