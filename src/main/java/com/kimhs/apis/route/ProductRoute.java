@@ -1,10 +1,10 @@
 package com.kimhs.apis.route;
 
+import com.kimhs.apis.model.Product;
+import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.ProductService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 @RestController
 @RequestMapping("/product")
@@ -14,6 +14,12 @@ public class ProductRoute {
     @Autowired
     public ProductRoute(ProductService productService) {
         this.productService = productService;
+    }
+
+    @GetMapping("/{product_id}")
+    @ResponseBody
+    public Product getProduct(@PathVariable(value="product_id") String productId) throws Exception {
+        return this.productService.find(Integer.parseInt(productId));
     }
 
     @GetMapping("/initialize")
