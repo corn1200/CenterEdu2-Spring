@@ -1,5 +1,6 @@
 package com.kimhs.apis.route;
 
+import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.SaleService;
 import com.kimhs.apis.service.UserService;
@@ -16,6 +17,12 @@ public class SaleRoute {
     @Autowired
     public SaleRoute(SaleService saleService) {
         this.saleService = saleService;
+    }
+
+    @GetMapping("/{sale_id}")
+    @ResponseBody
+    public Sale getSale(@PathVariable(value="sale_id") String saleId) throws Exception {
+        return this.saleService.find(Integer.parseInt(saleId));
     }
 
     @GetMapping("/initialize")
