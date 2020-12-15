@@ -3,6 +3,8 @@ package com.kimhs.apis.route;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.ProductService;
+import com.kimhs.apis.vo.ProductRegisterVO;
+import com.kimhs.apis.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -22,8 +24,18 @@ public class ProductRoute {
         return this.productService.find(Integer.parseInt(productId));
     }
 
+    @PostMapping("")
+    public void createProduct(ProductRegisterVO product) {
+        this.productService.createProduct(product);
+    }
+
     @GetMapping("/initialize")
     public void initializeProducts() {
         this.productService.initializeProducts();
+    }
+
+    @DeleteMapping("/{product_id}")
+    public void deleteProduct(@PathVariable(value = "product_id") String productId) {
+        this.productService.deleteProduct(Integer.parseInt(productId));
     }
 }
