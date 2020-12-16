@@ -1,6 +1,10 @@
 package com.kimhs.apis.route;
 
+import com.kimhs.apis.datamodel.SaleGroupByUserId;
+import com.kimhs.apis.datamodel.UserTotalPaidPrice;
+import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
+import com.kimhs.apis.service.SaleService;
 import com.kimhs.apis.service.UserService;
 import com.kimhs.apis.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +16,13 @@ import java.util.List;
 @RequestMapping("/user")
 public class UserRoute {
     private final UserService userService;
+    private final SaleService saleService;
 
     @Autowired
-    public UserRoute(UserService userService) {
+    public UserRoute(UserService userService,
+                     SaleService saleService) {
         this.userService = userService;
+        this.saleService = saleService;
     }
 
     @GetMapping("")
@@ -31,8 +38,8 @@ public class UserRoute {
     }
 
     @PostMapping("")
-    public void createUser(UserRegisterVO user) {
-        this.userService.createUser(user);
+    public int createUser(UserRegisterVO user) {
+        return this.userService.createUser(user);
     }
 
     @GetMapping("/initialize")
@@ -43,5 +50,15 @@ public class UserRoute {
     @DeleteMapping("/{user_id}")
     public void deleteUser(@PathVariable(value = "user_id") String userId) {
         this.userService.deleteUser(Integer.parseInt(userId));
+    }
+
+    @GetMapping("/{user_id}/purchase_list")
+    public List<Sale> userPurchaseList(@PathVariable(value = "user_id") String userId) {
+        return this.saleService.getSalesByUserId(Integer.parseInt(userId));
+    }
+
+    @GetMapping("/{user_id}/purchase_amount")
+    public UserTotalPaidPrice userPurchaseAmount(@PathVariable(value = "user_id") String userId) {
+        return this.saleService.getTotalPaidPriceByUserId(Integer.parseInt(userId));
     }
 }

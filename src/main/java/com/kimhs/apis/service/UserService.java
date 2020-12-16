@@ -1,6 +1,10 @@
 package com.kimhs.apis.service;
 
+import com.kimhs.apis.datamodel.SaleGroupByUserId;
+import com.kimhs.apis.datamodel.UserGradeEnum;
+import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.User;
+import com.kimhs.apis.repository.SaleRepository;
 import com.kimhs.apis.repository.UserRepository;
 import com.kimhs.apis.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,10 +16,12 @@ import java.util.Optional;
 @Controller
 public class UserService {
     private final UserRepository userRepository;
+    private final SaleRepository saleRepository;
 
     @Autowired
-    public UserService(UserRepository userRepository) {
+    public UserService(UserRepository userRepository, SaleRepository saleRepository) {
         this.userRepository = userRepository;
+        this.saleRepository = saleRepository;
     }
 
     public User find(int userId) throws Exception {
@@ -52,7 +58,7 @@ public class UserService {
         this.userRepository.flush();
     }
 
-    public void createUser(UserRegisterVO userRegisterVO) {
+    public int createUser(UserRegisterVO userRegisterVO) {
         User createUser = User.builder()
                 .email(userRegisterVO.getEmail())
                 .phone(userRegisterVO.getPhone())
@@ -61,9 +67,32 @@ public class UserService {
 
         this.userRepository.save(createUser);
         this.userRepository.flush();
+
+        return createUser.getUserId();
     }
 
     public void deleteUser(int userId) {
         this.userRepository.deleteById(userId);
+    }
+
+    public UserGradeEnum getUserGrade(int userId) {
+        SaleGroupByUserId groupData = this.saleRepository.PurchaseAmountGroupByUserId(userId);
+        UserTotalPaidPrice userTotalPaidPrice = new UserTotalPaidPrice(groupData);
+
+        if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+            return UserGradeEnum.FirstGrade;
+        }
+        else if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+            return UserGradeEnum.SecondGrade;
+        }
+        else if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+            return UserGradeEnum.ThirdGrade;
+        }
+        else if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+            return UserGradeEnum.FourthGrade;
+        }
+        else {
+            return UserGradeEnum.TopTier;
+        }
     }
 }

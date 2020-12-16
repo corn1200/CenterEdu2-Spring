@@ -8,6 +8,8 @@ import com.kimhs.apis.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequestMapping("/product")
 public class ProductRoute {
@@ -18,6 +20,10 @@ public class ProductRoute {
         this.productService = productService;
     }
 
+    @GetMapping("")
+    @ResponseBody
+    public List<User> getProducts() { return this.productService.findAll(); }
+
     @GetMapping("/{product_id}")
     @ResponseBody
     public Product getProduct(@PathVariable(value="product_id") String productId) throws Exception {
@@ -25,8 +31,8 @@ public class ProductRoute {
     }
 
     @PostMapping("")
-    public void createProduct(ProductRegisterVO product) {
-        this.productService.createProduct(product);
+    public int createProduct(ProductRegisterVO product) {
+        return this.productService.createProduct(product);
     }
 
     @GetMapping("/initialize")

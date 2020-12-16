@@ -6,6 +6,7 @@ import com.kimhs.apis.vo.ProductRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -20,6 +21,10 @@ public class ProductService {
     public Product find(int productId) throws Exception {
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
         return searchedProduct.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다."));
+    }
+
+    public List findAll() {
+        return this.productRepository.findAll();
     }
 
     public void initializeProducts() {
@@ -50,7 +55,7 @@ public class ProductService {
         this.productRepository.flush();
     }
 
-    public void createProduct(ProductRegisterVO productRegisterVO) {
+    public int createProduct(ProductRegisterVO productRegisterVO) {
         Product createProduct = Product.builder()
                 .name(productRegisterVO.getName())
                 .description(productRegisterVO.getDescription())
@@ -60,6 +65,8 @@ public class ProductService {
 
         this.productRepository.save(createProduct);
         this.productRepository.flush();
+
+        return createProduct.getProductId();
     }
 
     public void deleteProduct(int productId) {
