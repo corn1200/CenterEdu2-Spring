@@ -1,6 +1,8 @@
 package com.kimhs.apis.service;
 
+import com.kimhs.apis.datamodel.SaleGroupByUserId;
 import com.kimhs.apis.datamodel.SaleStatusEnum;
+import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
@@ -113,5 +115,14 @@ public class SaleService {
         this.saleRepository.save(sale2);
         this.saleRepository.save(sale3);
         this.saleRepository.flush();
+    }
+
+    public List<Sale> getSalesByUserId(int userId) {
+        return this.saleRepository.findByUserId(userId);
+    }
+
+    public UserTotalPaidPrice getTotalPaidPriceByUserId(int userId) {
+        SaleGroupByUserId groupData = this.saleRepository.PurchaseAmountGroupByUserId(userId);
+        return new UserTotalPaidPrice(groupData);
     }
 }
