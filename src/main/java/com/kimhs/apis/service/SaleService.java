@@ -11,6 +11,7 @@ import com.kimhs.apis.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.List;
 import java.util.Optional;
 
 @Controller
@@ -33,12 +34,16 @@ public class SaleService {
         return searchedSale.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다."));
     }
 
+    public List findAll() {
+        return this.saleRepository.findAll();
+    }
+
     public int createSale(SalePurchaseVO salePurchaseVO) throws Exception{
         Optional<Product> product = this.productRepository.findById(salePurchaseVO.getProductId());
         Optional<User> user = this.userRepository.findById(salePurchaseVO.getUserId());
 
         Product findProduct = product.orElseThrow(() -> new Exception("해당 상품 ID가 존재하지 않습니다."));
-        user.orElseThrow(() -> new Exception("해당 상품 ID가 존재하지 않습니다."));
+        user.orElseThrow(() -> new Exception("해당 유저 ID가 존재하지 않습니다."));
 
         if (salePurchaseVO.getListPrice() != findProduct.getListPrice() * salePurchaseVO.getAmount()) {
             throw new Exception("정가가 상품정보에 등록된 가격과 다릅니다.");

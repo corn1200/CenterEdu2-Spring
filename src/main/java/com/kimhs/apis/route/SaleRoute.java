@@ -20,6 +20,12 @@ public class SaleRoute {
         this.saleService = saleService;
     }
 
+    @GetMapping("")
+    @ResponseBody
+    public List<User> getSales() {
+        return this.saleService.findAll();
+    }
+
     @GetMapping("/{sale_id}")
     @ResponseBody
     public Sale getSale(@PathVariable(value="sale_id") String saleId) throws Exception {
