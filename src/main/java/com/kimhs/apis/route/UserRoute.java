@@ -1,6 +1,7 @@
 package com.kimhs.apis.route;
 
 import com.kimhs.apis.datamodel.SaleGroupByUserId;
+import com.kimhs.apis.datamodel.UserGradeEnum;
 import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
@@ -53,12 +54,18 @@ public class UserRoute {
     }
 
     @GetMapping("/{user_id}/purchase_list")
-    public List<Sale> userPurchaseList(@PathVariable(value = "user_id") String userId) {
+    public List<Sale> getUserPurchaseList(@PathVariable(value = "user_id") String userId) {
         return this.saleService.getSalesByUserId(Integer.parseInt(userId));
     }
 
     @GetMapping("/{user_id}/purchase_amount")
-    public UserTotalPaidPrice userPurchaseAmount(@PathVariable(value = "user_id") String userId) {
+    public UserTotalPaidPrice getUserPurchaseAmount(@PathVariable(value = "user_id") String userId) {
         return this.saleService.getTotalPaidPriceByUserId(Integer.parseInt(userId));
+    }
+
+    @GetMapping("{user_id}/grade")
+    @ResponseBody
+    public UserGradeEnum getUserGrade(@PathVariable(value = "user_id") String userId) {
+        return this.userService.getUserGrade(Integer.parseInt(userId));
     }
 }
