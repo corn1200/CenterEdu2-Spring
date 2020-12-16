@@ -1,8 +1,10 @@
 package com.kimhs.apis.service;
 
+import com.kimhs.apis.datamodel.SaleStatusEnum;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.repository.SaleRepository;
+import com.kimhs.apis.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -20,6 +22,34 @@ public class SaleService {
     public Sale find(int saleId) throws Exception {
         Optional<Sale> searchedSale = this.saleRepository.findById(saleId);
         return searchedSale.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다."));
+    }
+
+    public int createSale(SalePurchaseVO salePurchaseVO) {
+        Sale createdSale = Sale.builder()
+                .userId(salePurchaseVO.getUserId())
+                .productId(salePurchaseVO.getProductId())
+                .paidPrice(salePurchaseVO.getPaidPrice())
+                .listPrice(salePurchaseVO.getListPrice())
+                .amount(salePurchaseVO.getAmount())
+                .build();
+
+        this.saleRepository.save(createdSale);
+        this.saleRepository.flush();
+
+        return createdSale.getSaleId();
+    }
+
+    public void purchase(int saleId) throws Exception {
+        Optional<Sale> purchaseSale = this.saleRepository.findById(saleId);
+        Sale sale = purchaseSale.orElseThrow(() -> new Exception(("결제 완료로 변경하는 도중에 문제가 발생하였습니다.")));
+
+        sale.setStatus(SaleStatusEnum.PAID);
+        this.saleRepository.save(sale);
+        this.saleRepository.flush();
+    }
+
+    public void refund(int orderId) {
+
     }
 
     public void initializeSales() {

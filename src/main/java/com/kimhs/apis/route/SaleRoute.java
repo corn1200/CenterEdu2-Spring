@@ -4,6 +4,7 @@ import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.SaleService;
 import com.kimhs.apis.service.UserService;
+import com.kimhs.apis.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,5 +29,11 @@ public class SaleRoute {
     @GetMapping("/initialize")
     public void initializeSales() {
         this.saleService.initializeSales();
+    }
+
+    @PostMapping("/purchase")
+    public void purchase(SalePurchaseVO salePurchaseVO) throws Exception {
+        int saleId = this.saleService.createSale(salePurchaseVO);
+        this.saleService.purchase(saleId);
     }
 }

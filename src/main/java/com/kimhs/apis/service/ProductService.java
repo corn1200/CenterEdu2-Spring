@@ -3,6 +3,8 @@ package com.kimhs.apis.service;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.repository.ProductRepository;
+import com.kimhs.apis.vo.ProductRegisterVO;
+import com.kimhs.apis.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -48,5 +50,21 @@ public class ProductService {
         this.productRepository.save(product2);
         this.productRepository.save(product3);
         this.productRepository.flush();
+    }
+
+    public void createProduct(ProductRegisterVO productRegisterVO) {
+        Product createProduct = Product.builder()
+                .name(productRegisterVO.getName())
+                .description(productRegisterVO.getDescription())
+                .listPrice(Integer.parseInt(productRegisterVO.getListPrice()))
+                .price(Integer.parseInt(productRegisterVO.getPrice()))
+                .build();
+
+        this.productRepository.save(createProduct);
+        this.productRepository.flush();
+    }
+
+    public void deleteProduct(int productId) {
+        this.productRepository.deleteById(productId);
     }
 }
