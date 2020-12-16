@@ -1,8 +1,10 @@
 package com.kimhs.apis.model;
 
+import com.kimhs.apis.datamodel.*;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
 
@@ -28,6 +30,10 @@ public class Sale {
 
     @Column(nullable = false)
     private int amount;
+
+    @Setter
+    @Enumerated(EnumType.STRING)
+    private SaleStatusEnum status = SaleStatusEnum.NON_PAID;
 
     @Builder
     public Sale(int saleId, int userId, int productId, int paidPrice, int listPrice, int amount) {
