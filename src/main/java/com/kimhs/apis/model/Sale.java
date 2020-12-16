@@ -36,8 +36,7 @@ public class Sale {
     private SaleStatusEnum status = SaleStatusEnum.NON_PAID;
 
     @Builder
-    public Sale(int saleId, int userId, int productId, int paidPrice, int listPrice, int amount) {
-        this.saleId = saleId;
+    public Sale(int userId, int productId, int paidPrice, int listPrice, int amount) {
         this.userId = userId;
         this.productId = productId;
         this.paidPrice = paidPrice;
