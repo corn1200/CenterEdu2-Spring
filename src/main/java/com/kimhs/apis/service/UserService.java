@@ -82,13 +82,13 @@ public class UserService {
         if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
             return UserGradeEnum.FirstGrade;
         }
-        else if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+        else if (userTotalPaidPrice.getTotalPaidPrice() < 1000000) {
             return UserGradeEnum.SecondGrade;
         }
-        else if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+        else if (userTotalPaidPrice.getTotalPaidPrice() < 3000000) {
             return UserGradeEnum.ThirdGrade;
         }
-        else if (userTotalPaidPrice.getTotalPaidPrice() < 100000) {
+        else if (userTotalPaidPrice.getTotalPaidPrice() < 10000000) {
             return UserGradeEnum.FourthGrade;
         }
         else {
