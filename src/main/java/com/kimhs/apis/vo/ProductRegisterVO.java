@@ -10,8 +10,9 @@ import lombok.Setter;
 public class ProductRegisterVO {
     private String name;
     private String description;
-    private String listPrice;
-    private String price;
+    private int listPrice;
+    private int price;
+    private String category;
 
     @Override
     public String toString() {
