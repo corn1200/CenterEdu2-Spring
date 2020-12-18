@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
 
 @Getter
@@ -34,8 +35,8 @@ public class Product {
     private String imageUrl;
 
     @OneToMany
-    @JoinColumn(name = "product_id", referencedColumnName = "product_id")
-    private Collection<Review> review;
+    @JoinColumn(name = "product_id")
+    private Collection<Review> review = new ArrayList<>();
 
     @Builder
     public Product(String name, String description, int listPrice, int price, String category, String imageUrl) {
@@ -50,7 +51,7 @@ public class Product {
     @Override
     public String toString() {
         return String.format(
-                "Product[productId='%s', name='%s', description='%s', listPrice=%d, price=%d, category='%s', url='%s']",
+                "Product[productId='%s', name='%s', description='%s', listPrice=%d, price=%d, category='%s', imageUrl='%s']",
                 this.productId, this.name, this.description, this.listPrice, this.price, this.category, this.imageUrl
         );
     }
