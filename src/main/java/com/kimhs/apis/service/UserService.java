@@ -96,7 +96,7 @@ public class UserService {
         }
     }
 
-    private UserGradeEnum getUserGradeByTotalPaidPrice(int totalPaidPrice) {
+    public UserGradeEnum getUserGradeByTotalPaidPrice(int totalPaidPrice) {
         if (totalPaidPrice < 100000) {
             return UserGradeEnum.FirstGrade;
         }
