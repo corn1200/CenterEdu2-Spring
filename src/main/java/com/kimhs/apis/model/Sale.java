@@ -1,6 +1,6 @@
 package com.kimhs.apis.model;
 
-import com.kimhs.apis.datamodel.*;
+import com.kimhs.apis.datamodel.enumModel.SaleStatusEnum;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;

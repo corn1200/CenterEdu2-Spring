@@ -1,16 +1,18 @@
 package com.kimhs.apis.service;
 
 import com.kimhs.apis.datamodel.SaleGroupByUserId;
-import com.kimhs.apis.datamodel.SaleStatusEnum;
+import com.kimhs.apis.datamodel.dto.SaleDTO;
+import com.kimhs.apis.datamodel.enumModel.SaleStatusEnum;
 import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.*;
 import com.kimhs.apis.repository.*;
-import com.kimhs.apis.vo.SalePurchaseVO;
+import com.kimhs.apis.datamodel.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class SaleService {
@@ -33,12 +35,12 @@ public class SaleService {
         this.issuedCouponRepository = issuedCouponRepository;
     }
 
-    public Sale find(int saleId) throws Exception {
+    public SaleDTO saleById(int saleId) throws Exception {
         Optional<Sale> searchedSale = this.saleRepository.findById(saleId);
-        return searchedSale.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다."));
+        return new SaleDTO(searchedSale.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다.")));
     }
 
-    public List findAll() {
+    public List sales() {
         return this.saleRepository.findAll();
     }
 
@@ -143,8 +145,10 @@ public class SaleService {
         this.saleRepository.flush();
     }
 
-    public List<Sale> getSalesByUserId(int userId) {
-        return this.saleRepository.findByUserId(userId);
+    public List<SaleDTO> getSalesByUserId(int userId) {
+        return this.saleRepository.findByUserId(userId).stream()
+                .map(SaleDTO::new)
+                .collect(Collectors.toList());
     }
 
     public UserTotalPaidPrice getTotalPaidPriceByUserId(int userId) {

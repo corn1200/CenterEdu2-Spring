@@ -1,13 +1,16 @@
 package com.kimhs.apis.service;
 
+import com.kimhs.apis.datamodel.dto.ProductDTO;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.repository.ProductRepository;
-import com.kimhs.apis.vo.ProductRegisterVO;
+import com.kimhs.apis.datamodel.vo.ProductRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class ProductService {
@@ -18,13 +21,15 @@ public class ProductService {
         this.productRepository = productRepository;
     }
 
-    public Product find(int productId) throws Exception {
+    public ProductDTO productById(int productId) throws Exception {
         Optional<Product> searchedProduct = this.productRepository.findById(productId);
-        return searchedProduct.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다."));
+        return new ProductDTO(searchedProduct.orElseThrow(() -> new Exception("해당 상품을 찾지 못하였습니다.")));
     }
 
-    public List findAll() {
-        return this.productRepository.findAll();
+    public List<ProductDTO> products() {
+        return this.productRepository.findAll().stream()
+                .map(ProductDTO::new)
+                .collect(Collectors.toList());
     }
 
     public void initializeProducts() {
@@ -81,7 +86,9 @@ public class ProductService {
         this.productRepository.deleteById(productId);
     }
 
-    public List<Product> productsByCategory(String category) {
-        return this.productRepository.findByCategory(category);
+    public List<ProductDTO> productsByCategory(String category) {
+        return this.productRepository.findByCategory(category).stream()
+                .map(ProductDTO::new)
+                .collect(Collectors.toList());
     }
 }

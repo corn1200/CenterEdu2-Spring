@@ -1,5 +1,6 @@
 package com.kimhs.apis.service;
 
+import com.kimhs.apis.datamodel.dto.IssuedCouponDTO;
 import com.kimhs.apis.model.Coupon;
 import com.kimhs.apis.model.IssuedCoupon;
 import com.kimhs.apis.repository.CouponRepository;
@@ -23,8 +24,8 @@ public class IssuedCouponService {
         this.couponRepository = couponRepository;
     }
 
-    public IssuedCoupon issueCouponById(int issueCouponId) throws Exception {
-        return this.issuedCouponRepository.findById(issueCouponId).orElseThrow(() -> new Exception("해당 발급된 쿠폰 ID가 없습니다."));
+    public IssuedCouponDTO issueCouponById(int issueCouponId) throws Exception {
+        return new IssuedCouponDTO(this.issuedCouponRepository.findById(issueCouponId).orElseThrow(() -> new Exception("해당 발급된 쿠폰 ID가 없습니다.")));
     }
 
     public int issueCoupon(int couponId, int userId) throws Exception {

@@ -1,9 +1,8 @@
 package com.kimhs.apis;
 
-import com.kimhs.apis.model.Coupon;
 import com.kimhs.apis.repository.CouponRepository;
 import com.kimhs.apis.service.CouponService;
-import com.kimhs.apis.vo.CouponRegisterVO;
+import com.kimhs.apis.datamodel.vo.CouponRegisterVO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;

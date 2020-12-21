@@ -1,8 +1,9 @@
 package com.kimhs.apis.service;
 
+import com.kimhs.apis.datamodel.dto.CouponDTO;
 import com.kimhs.apis.model.Coupon;
 import com.kimhs.apis.repository.CouponRepository;
-import com.kimhs.apis.vo.CouponRegisterVO;
+import com.kimhs.apis.datamodel.vo.CouponRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
@@ -37,8 +38,9 @@ public class CouponService {
         return createdCoupon.getCouponId();
     }
 
-    public Coupon couponById(int couponId) throws Exception {
+    public CouponDTO couponById(int couponId) throws Exception {
         Optional<Coupon> coupon = this.couponRepository.findById(couponId);
-        return coupon.orElseThrow(() -> new Exception("해당 쿠폰을 확인할 수 없습니다"));
+
+        return new CouponDTO(coupon.orElseThrow(() -> new Exception("해당 쿠폰을 확인할 수 없습니다")));
     }
 }

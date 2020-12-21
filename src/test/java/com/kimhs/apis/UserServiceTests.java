@@ -1,6 +1,6 @@
 package com.kimhs.apis;
 
-import com.kimhs.apis.datamodel.UserGradeEnum;
+import com.kimhs.apis.datamodel.enumModel.UserGradeEnum;
 import com.kimhs.apis.service.UserService;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;

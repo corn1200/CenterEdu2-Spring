@@ -1,13 +1,14 @@
 package com.kimhs.apis.route;
 
-import com.kimhs.apis.datamodel.SaleGroupByUserId;
-import com.kimhs.apis.datamodel.UserGradeEnum;
+import com.kimhs.apis.datamodel.dto.SaleDTO;
+import com.kimhs.apis.datamodel.dto.UserDTO;
+import com.kimhs.apis.datamodel.enumModel.UserGradeEnum;
 import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.SaleService;
 import com.kimhs.apis.service.UserService;
-import com.kimhs.apis.vo.UserRegisterVO;
+import com.kimhs.apis.datamodel.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,14 +29,14 @@ public class UserRoute {
 
     @GetMapping("")
     @ResponseBody
-    public List<User> getUsers() {
-        return this.userService.findAll();
+    public List<UserDTO> getUsers() {
+        return this.userService.users();
     }
 
     @GetMapping("/{user_id}")
     @ResponseBody
-    public User getUser(@PathVariable(value = "user_id") String userId) throws Exception {
-        return this.userService.find(Integer.parseInt(userId));
+    public UserDTO getUser(@PathVariable(value = "user_id") String userId) throws Exception {
+        return this.userService.userById(Integer.parseInt(userId));
     }
 
     @PostMapping("")
@@ -54,7 +55,7 @@ public class UserRoute {
     }
 
     @GetMapping("/{user_id}/purchase_list")
-    public List<Sale> getUserPurchaseList(@PathVariable(value = "user_id") String userId) {
+    public List<SaleDTO> getUserPurchaseList(@PathVariable(value = "user_id") String userId) {
         return this.saleService.getSalesByUserId(Integer.parseInt(userId));
     }
 

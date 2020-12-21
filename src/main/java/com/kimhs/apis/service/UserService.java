@@ -1,17 +1,19 @@
 package com.kimhs.apis.service;
 
 import com.kimhs.apis.datamodel.SaleGroupByUserId;
-import com.kimhs.apis.datamodel.UserGradeEnum;
+import com.kimhs.apis.datamodel.dto.UserDTO;
+import com.kimhs.apis.datamodel.enumModel.UserGradeEnum;
 import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.repository.SaleRepository;
 import com.kimhs.apis.repository.UserRepository;
-import com.kimhs.apis.vo.UserRegisterVO;
+import com.kimhs.apis.datamodel.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Controller
 public class UserService {
@@ -24,13 +26,15 @@ public class UserService {
         this.saleRepository = saleRepository;
     }
 
-    public User find(int userId) throws Exception {
+    public UserDTO userById(int userId) throws Exception {
         Optional<User> searchedUser = this.userRepository.findById(userId);
-        return searchedUser.orElseThrow(() -> new Exception("해당 유저를 찾지 못하였습니다."));
+        return new UserDTO(searchedUser.orElseThrow(() -> new Exception("해당 유저를 찾지 못하였습니다.")));
     }
 
-    public List findAll() {
-        return this.userRepository.findAll();
+    public List<UserDTO> users() {
+        return this.userRepository.findAll().stream()
+                .map(UserDTO::new)
+                .collect(Collectors.toList());
     }
 
     public void initializeUsers() {

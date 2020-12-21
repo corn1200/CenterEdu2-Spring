@@ -1,4 +1,4 @@
-package com.kimhs.apis.datamodel;
+package com.kimhs.apis.datamodel.enumModel;
 
 public enum UserGradeEnum {
     FirstGrade,
