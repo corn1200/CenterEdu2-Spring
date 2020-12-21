@@ -95,4 +95,22 @@ public class UserService {
             return UserGradeEnum.TopTier;
         }
     }
+
+    private UserGradeEnum getUserGradeByTotalPaidPrice(int totalPaidPrice) {
+        if (totalPaidPrice < 100000) {
+            return UserGradeEnum.FirstGrade;
+        }
+        else if (totalPaidPrice < 1000000) {
+            return UserGradeEnum.SecondGrade;
+        }
+        else if (totalPaidPrice < 3000000) {
+            return UserGradeEnum.ThirdGrade;
+        }
+        else if (totalPaidPrice < 10000000) {
+            return UserGradeEnum.FourthGrade;
+        }
+        else {
+            return UserGradeEnum.TopTier;
+        }
+    }
 }
