@@ -1,4 +1,4 @@
-package com.kimhs.apis.vo;
+package com.kimhs.apis.datamodel.vo;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;

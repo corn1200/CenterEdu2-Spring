@@ -4,7 +4,7 @@ import com.kimhs.apis.model.Coupon;
 import com.kimhs.apis.model.IssuedCoupon;
 import com.kimhs.apis.service.CouponService;
 import com.kimhs.apis.service.IssuedCouponService;
-import com.kimhs.apis.vo.CouponRegisterVO;
+import com.kimhs.apis.datamodel.vo.CouponRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

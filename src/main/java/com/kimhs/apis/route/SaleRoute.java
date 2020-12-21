@@ -3,8 +3,7 @@ package com.kimhs.apis.route;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.SaleService;
-import com.kimhs.apis.service.UserService;
-import com.kimhs.apis.vo.SalePurchaseVO;
+import com.kimhs.apis.datamodel.vo.SalePurchaseVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

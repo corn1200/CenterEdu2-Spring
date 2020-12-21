@@ -2,7 +2,7 @@ package com.kimhs.apis.service;
 
 import com.kimhs.apis.model.Coupon;
 import com.kimhs.apis.repository.CouponRepository;
-import com.kimhs.apis.vo.CouponRegisterVO;
+import com.kimhs.apis.datamodel.vo.CouponRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

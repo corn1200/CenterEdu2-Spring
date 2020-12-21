@@ -2,7 +2,7 @@ package com.kimhs.apis.service;
 
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.repository.ProductRepository;
-import com.kimhs.apis.vo.ProductRegisterVO;
+import com.kimhs.apis.datamodel.vo.ProductRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

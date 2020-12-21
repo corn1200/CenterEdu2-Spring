@@ -1,12 +1,12 @@
 package com.kimhs.apis.service;
 
 import com.kimhs.apis.datamodel.SaleGroupByUserId;
-import com.kimhs.apis.datamodel.UserGradeEnum;
+import com.kimhs.apis.datamodel.enumModel.UserGradeEnum;
 import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.repository.SaleRepository;
 import com.kimhs.apis.repository.UserRepository;
-import com.kimhs.apis.vo.UserRegisterVO;
+import com.kimhs.apis.datamodel.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 

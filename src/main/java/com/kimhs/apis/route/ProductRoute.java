@@ -3,8 +3,7 @@ package com.kimhs.apis.route;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.ProductService;
-import com.kimhs.apis.vo.ProductRegisterVO;
-import com.kimhs.apis.vo.UserRegisterVO;
+import com.kimhs.apis.datamodel.vo.ProductRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

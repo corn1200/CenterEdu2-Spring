@@ -1,13 +1,12 @@
 package com.kimhs.apis.route;
 
-import com.kimhs.apis.datamodel.SaleGroupByUserId;
-import com.kimhs.apis.datamodel.UserGradeEnum;
+import com.kimhs.apis.datamodel.enumModel.UserGradeEnum;
 import com.kimhs.apis.datamodel.UserTotalPaidPrice;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.SaleService;
 import com.kimhs.apis.service.UserService;
-import com.kimhs.apis.vo.UserRegisterVO;
+import com.kimhs.apis.datamodel.vo.UserRegisterVO;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
