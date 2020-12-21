@@ -1,5 +1,6 @@
 package com.kimhs.apis.route;
 
+import com.kimhs.apis.datamodel.dto.ProductDTO;
 import com.kimhs.apis.model.Product;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.ProductService;
@@ -21,12 +22,12 @@ public class ProductRoute {
 
     @GetMapping("")
     @ResponseBody
-    public List<User> getProducts() { return this.productService.findAll(); }
+    public List<ProductDTO> getProducts() { return this.productService.products(); }
 
     @GetMapping("/{product_id}")
     @ResponseBody
-    public Product getProduct(@PathVariable(value="product_id") String productId) throws Exception {
-        return this.productService.find(Integer.parseInt(productId));
+    public ProductDTO getProduct(@PathVariable(value="product_id") String productId) throws Exception {
+        return this.productService.productById(Integer.parseInt(productId));
     }
 
     @PostMapping("")
@@ -46,7 +47,7 @@ public class ProductRoute {
 
     @GetMapping("/category/{category_name}")
     @ResponseBody
-    public List<Product> getProductsByCategory(@PathVariable(value = "category_name") String category_name) {
+    public List<ProductDTO> getProductsByCategory(@PathVariable(value = "category_name") String category_name) {
         return this.productService.productsByCategory(category_name);
     }
 }

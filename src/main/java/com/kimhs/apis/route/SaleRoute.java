@@ -1,5 +1,6 @@
 package com.kimhs.apis.route;
 
+import com.kimhs.apis.datamodel.dto.SaleDTO;
 import com.kimhs.apis.model.Sale;
 import com.kimhs.apis.model.User;
 import com.kimhs.apis.service.SaleService;
@@ -21,14 +22,14 @@ public class SaleRoute {
 
     @GetMapping("")
     @ResponseBody
-    public List<User> getSales() {
-        return this.saleService.findAll();
+    public List<SaleDTO> getSales() {
+        return this.saleService.sales();
     }
 
     @GetMapping("/{sale_id}")
     @ResponseBody
-    public Sale getSale(@PathVariable(value="sale_id") String saleId) throws Exception {
-        return this.saleService.find(Integer.parseInt(saleId));
+    public SaleDTO getSale(@PathVariable(value="sale_id") String saleId) throws Exception {
+        return this.saleService.saleById(Integer.parseInt(saleId));
     }
 
     @GetMapping("/initialize")
