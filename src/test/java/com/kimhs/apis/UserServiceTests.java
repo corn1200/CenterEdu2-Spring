@@ -26,7 +26,7 @@ public class UserServiceTests {
         // When
         UserGradeEnum userGrade = this.userService.getUserGradeByTotalPaidPrice(totalPaidAmount);
 
-        // When
+        // Then
         assertEquals(userGrade, UserGradeEnum.FirstGrade);
     }
 
@@ -38,7 +38,7 @@ public class UserServiceTests {
         // When
         UserGradeEnum userGrade = this.userService.getUserGradeByTotalPaidPrice(totalPaidAmount);
 
-        // When
+        // Then
         assertEquals(userGrade, UserGradeEnum.SecondGrade);
     }
 
@@ -50,7 +50,7 @@ public class UserServiceTests {
         // When
         UserGradeEnum userGrade = this.userService.getUserGradeByTotalPaidPrice(totalPaidAmount);
 
-        // When
+        // Then
         assertEquals(userGrade, UserGradeEnum.ThirdGrade);
     }
 
@@ -62,7 +62,7 @@ public class UserServiceTests {
         // When
         UserGradeEnum userGrade = this.userService.getUserGradeByTotalPaidPrice(totalPaidAmount);
 
-        // When
+        // Then
         assertEquals(userGrade, UserGradeEnum.FourthGrade);
     }
 
@@ -74,7 +74,7 @@ public class UserServiceTests {
         // When
         UserGradeEnum userGrade = this.userService.getUserGradeByTotalPaidPrice(totalPaidAmount);
 
-        // When
+        // Then
         assertEquals(userGrade, UserGradeEnum.TopTier);
     }
 
@@ -84,6 +84,6 @@ public class UserServiceTests {
         int totalPaidAmount = -1;
 
         // When
-        // When
+        // Then
     }
 }
